@@ -20,8 +20,8 @@ services:
       - DD_AGENT_HOST=datadog
     env_file:
       - .env.example
-    volumes:
-      - .:/var/www/html:cached
+    # volumes:
+    #   - .:/var/www/html:cached
 
   mysql:
     image: mysql:5.7
