@@ -8,7 +8,7 @@ services:
     volumes:
       - ./public:/var/www/html/public:ro
     ports:
-      - 8080:80
+      - 8001:80
     environment:
       PHP_HOST: app
 
@@ -31,20 +31,20 @@ services:
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     ports:
-      - 13306:3306
+      - 3306
 
-  datadog:
-    image: datadog/agent:latest
-    environment:
-      - DD_API_KEY=${DD_API_KEY}
-      - DD_TAGS=env:${USER}
-      - DD_APM_ENABLED=true
-    expose:
-      - 8126
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - /proc/:/host/proc:ro
-      - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
-    #XXX: Datadogのログ出力が多すぎるため、ログを破棄
-    logging:
-      driver: 'none'
+  # datadog:
+  #   image: datadog/agent:latest
+  #   environment:
+  #     - DD_API_KEY=${DD_API_KEY}
+  #     - DD_TAGS=env:${USER}
+  #     - DD_APM_ENABLED=true
+  #   expose:
+  #     - 8126
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock:ro
+  #     - /proc/:/host/proc:ro
+  #     - /sys/fs/cgroup:/host/sys/fs/cgroup:ro
+  #   #XXX: Datadogのログ出力が多すぎるため、ログを破棄
+  #   logging:
+  #     driver: 'none'
