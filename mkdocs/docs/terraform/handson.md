@@ -377,7 +377,6 @@ resource "aws_route_table_association" "private_1d" {
 }
 ```
 
-
 ### プロビジョニングの実行と確認
 
 いつもどおり `plan` と `apply` でプロビジョニングを行います。
@@ -386,7 +385,6 @@ resource "aws_route_table_association" "private_1d" {
 $ terraform plan
 $ terraform apply
 ```
-
 
 1. 3つPrivate Subnetが作成できているか
     - `aws-handson_private_1a` , `aws-handson_private_1c` , `aws-handson_private_1d`
@@ -404,6 +402,15 @@ $ terraform destroy
 ![terraform destroy](imgs/terraform-destroy.png)
 
 リソースの削除後、 `terraform apply` を実行しても同じ環境ができることを確認するのも良いかも知れません。
+
+最後に起動していたTerraform用Dockerを落として(e.g. `exit` コマンド)このハンズオンは終了です。
+
+!!! Terraformが管理しているリソース情報
+    tfstateというファイルにTerraformが現在管理しているリソースを記述します。  
+    デフォルトだとローカルに配置されてしまうので、S3 管理するなどしてローカルから手放しましょう。  
+    リソース管理のための機能はTerraformがデフォルトで提供しています。  
+    [Backends - Terraform by HashiCorp](https://www.terraform.io/docs/backends/)
+
 
 ## まとめ
 - `main.tf` に必要なリソースをコードで記述する
