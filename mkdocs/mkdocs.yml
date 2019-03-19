@@ -1,0 +1,54 @@
+site_name: 'AWS Handson'
+
+theme:
+  name: 'material'
+  language: 'ja'
+  palette:
+    primary: 'deep purple'
+    accent: 'deep purple'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  highlightjs: true
+  hljs_languages:
+    - 'yaml'
+    - 'dockerfile'
+    - 'ruby'
+
+extra:
+  search:
+    language: 'jp'
+
+markdown_extensions:
+  - 'admonition'
+  - 'footnotes'
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+extra_css:
+  - 'assets/custom.css'
+
+extra_javascript:
+  - 'assets/custom.js'
+
+nav:
+  - 'Home': 'index.md'
+  - 'Terraform':
+    - '概要': 'terraform/about.md'
+    - 'コマンドの用意': 'terraform/command.md'
+    - 'VPCの作成': 'terraform/create-vpc.md'
+    - 'Moduleの使用': 'terraform/module.md'
+  - 'ECS':
+    - '概要': 'index.md'
+    - 'Nginxを起動する': 'index.md'
+    - 'Laravelを起動する(ローカル)': 'index.md'
+    - 'Laravelを起動する(ECS)': 'index.md'
+  - 'Datadog':
+    - '概要': 'index.md'
+    - 'docker-composeで起動': 'index.md'
+    - 'AWSとの連携': 'index.md'
+    - 'ECSとの連携': 'index.md'
