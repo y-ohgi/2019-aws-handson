@@ -37,18 +37,19 @@ extra_javascript:
 
 nav:
   - 'Home': 'index.md'
-  - 'Terraform':
-    - '概要': 'terraform/about.md'
-    - 'コマンドの用意': 'terraform/command.md'
-    - 'VPCの作成': 'terraform/create-vpc.md'
-    - 'Moduleの使用': 'terraform/module.md'
-  - 'ECS':
-    - '概要': 'index.md'
-    - 'Nginxを起動する': 'index.md'
-    - 'Laravelを起動する(ローカル)': 'index.md'
-    - 'Laravelを起動する(ECS)': 'index.md'
-  - 'Datadog':
-    - '概要': 'index.md'
-    - 'docker-composeで起動': 'index.md'
-    - 'AWSとの連携': 'index.md'
-    - 'ECSとの連携': 'index.md'
+
+  # - 'Terraform':
+  #   - '概要': 'terraform/about.md'
+  #   - 'コマンドの用意': 'terraform/command.md'
+  #   - 'VPCの作成': 'terraform/create-vpc.md'
+  #   - 'Moduleの使用': 'terraform/module.md'
+  # - 'ECS':
+  #   - '概要': 'index.md'
+  #   - 'Nginxを起動する': 'index.md'
+  #   - 'Laravelを起動する(ローカル)': 'index.md'
+  #   - 'Laravelを起動する(ECS)': 'index.md'
+  # - 'Datadog':
+  #   - '概要': 'index.md'
+  #   - 'docker-composeで起動': 'index.md'
+  #   - 'AWSとの連携': 'index.md'
+  #   - 'ECSとの連携': 'index.md'
