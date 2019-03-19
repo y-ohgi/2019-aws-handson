@@ -78,23 +78,23 @@ $ docker run \
 実際にコードを書く前にどんなコマンドがあるか見ておきましょう。  
 Terraformは基本的以下の4つのコマンドで操作します。
 
-### init
+### `$ terraform init`
 初期化。  
 コードが依存するプラグインやModuleをダウンロードします。  
 
 `composer install` や `npm install` のようなイメージが近いです。
 
-### plan
+### `$ terraform plan`
 dry-run。  
 コードとAWSの環境を比較して、プロビジョニング結果を予測してくれます。  
 ただし、例外的なケース(AWSのリソース上限など)はplanからは予測できません。
 
-### apply
+### `$ terraform apply`
 プロビジョニング。  
 記述したコードを実際の環境に適用します。
 
 
-### destroy
+### `$ terraform destroy`
 削除。  
 管理しているリソースを全て削除します。
 
