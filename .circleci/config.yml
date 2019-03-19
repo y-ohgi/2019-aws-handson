@@ -11,9 +11,9 @@ jobs:
       - run:
           name: Build
           command: |
+            mv .git /tmp/
             cd mkdocs
             mkdocs build
-            mv .git /tmp/
             cp -r site/* /tmp/
       - run:
           name: Publish
