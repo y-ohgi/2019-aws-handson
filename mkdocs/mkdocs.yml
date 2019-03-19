@@ -40,9 +40,8 @@ nav:
   - 'Terraform':
     - '概要': 'terraform/about.md'
     - 'コマンドの用意': 'terraform/command.md'
-    - 'VPCの作成': 'terraform/create-vpc.md'
+    - 'ハンズオン': 'terraform/handson.md'
 
-  #   - 'Moduleの使用': 'terraform/module.md'
   # - 'ECS':
   #   - '概要': 'index.md'
   #   - 'Nginxを起動する': 'index.md'

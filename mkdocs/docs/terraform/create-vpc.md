@@ -216,7 +216,7 @@ $ terraform apply
 1. 3つSubnetが作成できているか
     - `aws-handson_public_1a` , `aws-handson_public_1c` , `aws-handson_public_1d`
 2. SubnetとInternet Gateway が紐付いているか
-    - "サブネットを選択" > "ルートテーブル" > 送信先が0.0.0.0、ターゲットがIGW (Internet GateWay)
+    - "サブネットを選択" > "ルートテーブル" > 送信先が0.0.0.0、ターゲットがInternet Gateway ( `igw-` から始まるターゲット)
 
 ![VPC list subnet](imgs/vpc-listsubnet.png)
 
@@ -228,10 +228,189 @@ $ terraform apply
 
 ### `main.tf` へ追記
 
+```ruby
+#########################
+# Private Subnet
+#########################
+# Route Table
+resource "aws_route_table" "private_1a" {
+  vpc_id = "${aws_vpc.main.id}"
+
+  tags = {
+    Name = "${var.name}"
+  }
+}
+
+resource "aws_route_table" "private_1c" {
+  vpc_id = "${aws_vpc.main.id}"
+
+  tags = {
+    Name = "${var.name}"
+  }
+}
+
+resource "aws_route_table" "private_1d" {
+  vpc_id = "${aws_vpc.main.id}"
+
+  tags = {
+    Name = "${var.name}"
+  }
+}
+
+# NAT Gateway
+resource "aws_eip" "nat_1a" {
+  vpc = true
+
+  tags = {
+    Name = "${var.name}_1a"
+  }
+}
+
+resource "aws_eip" "nat_1c" {
+  vpc = true
+
+  tags = {
+    Name = "${var.name}_1a"
+  }
+}
+
+resource "aws_eip" "nat_1d" {
+  vpc = true
+
+  tags = {
+    Name = "${var.name}_1a"
+  }
+}
+
+resource "aws_nat_gateway" "nat_1a" {
+  allocation_id = "${aws_eip.nat_1a.id}"
+  subnet_id     = "${aws_subnet.public_1a.id}"
+
+  tags = {
+    Name = "${var.name}_1a"
+  }
+}
+
+resource "aws_route" "private_natgw_1a" {
+  route_table_id         = "${aws_route_table.private_1a.id}"
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = "${aws_nat_gateway.nat_1a.id}"
+}
+
+resource "aws_nat_gateway" "nat_1c" {
+  allocation_id = "${aws_eip.nat_1c.id}"
+  subnet_id     = "${aws_subnet.public_1c.id}"
+
+  tags = {
+    Name = "${var.name}_1c"
+  }
+}
+
+resource "aws_route" "private_natgw_1c" {
+  route_table_id         = "${aws_route_table.private_1c.id}"
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = "${aws_nat_gateway.nat_1c.id}"
+}
+
+resource "aws_nat_gateway" "nat_1d" {
+  allocation_id = "${aws_eip.nat_1d.id}"
+  subnet_id     = "${aws_subnet.public_1d.id}"
+
+  tags = {
+    Name = "${var.name}_1d"
+  }
+}
+
+resource "aws_route" "private_natgw_1d" {
+  route_table_id         = "${aws_route_table.private_1d.id}"
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = "${aws_nat_gateway.nat_1d.id}"
+}
+
+# Private Subnet
+resource "aws_subnet" "private_1a" {
+  vpc_id = "${aws_vpc.main.id}"
+
+  cidr_block        = "10.0.10.0/24"
+  availability_zone = "ap-northeast-1a"
+
+  tags = {
+    Name = "${var.name}_private_1a"
+  }
+}
+
+resource "aws_route_table_association" "private_1a" {
+  subnet_id      = "${aws_subnet.private_1a.id}"
+  route_table_id = "${aws_route_table.private_1a.id}"
+}
+
+resource "aws_subnet" "private_1c" {
+  vpc_id = "${aws_vpc.main.id}"
+
+  cidr_block        = "10.0.11.0/24"
+  availability_zone = "ap-northeast-1c"
+
+  tags = {
+    Name = "${var.name}_private_1c"
+  }
+}
+
+resource "aws_route_table_association" "private_1c" {
+  subnet_id      = "${aws_subnet.private_1c.id}"
+  route_table_id = "${aws_route_table.private_1c.id}"
+}
+
+resource "aws_subnet" "private_1d" {
+  vpc_id = "${aws_vpc.main.id}"
+
+  cidr_block        = "10.0.12.0/24"
+  availability_zone = "ap-northeast-1d"
+
+  tags = {
+    Name = "${var.name}_private_1d"
+  }
+}
+
+resource "aws_route_table_association" "private_1d" {
+  subnet_id      = "${aws_subnet.private_1d.id}"
+  route_table_id = "${aws_route_table.private_1d.id}"
+}
+```
+
+
 ### プロビジョニングの実行と確認
 
+いつもどおり `plan` と `apply` でプロビジョニングを行います。
+
+```
+$ terraform plan
+$ terraform apply
+```
+
+
+1. 3つPrivate Subnetが作成できているか
+    - `aws-handson_private_1a` , `aws-handson_private_1c` , `aws-handson_private_1d`
+2. SubnetとNAT Gateway が紐付いているか
+    - "サブネットを選択" > "ルートテーブル" > 送信先が0.0.0.0、ターゲットがNAT Gateway ( `nat-` から始まるターゲット)
+
+![vpc list privatesubnet](imgs/vpc-list-privatesubnet.png)
+
+## 削除
+`destroy` コマンドでリソースを全て削除します。
+```
+$ terraform destroy
+```
+
+![terraform destroy](imgs/terraform-destroy.png)
+
+リソースの削除後、 `terraform apply` を実行しても同じ環境ができることを確認するのも良いかも知れません。
 
 ## まとめ
-- `main.tf` に必要なリソースを記述する
-- `terraform plan` でdry-run
-- `terraform apply` でプロビジョニング
+- `main.tf` に必要なリソースをコードで記述する
+    - コードはリファレンスを読んでAPIを確認しながら書く。
+    - [Provider: AWS - Terraform by HashiCorp](https://www.terraform.io/docs/providers/aws/index.html)
+- コマンドはシンプル
+    - `terraform init` で初期化
+    - `terraform plan` でdry-run
+    - `terraform apply` でプロビジョニング
+    - `terraform destroy` で削除
