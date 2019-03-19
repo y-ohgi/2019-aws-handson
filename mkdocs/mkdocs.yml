@@ -37,11 +37,11 @@ extra_javascript:
 
 nav:
   - 'Home': 'index.md'
+  - 'Terraform':
+    - '概要': 'terraform/about.md'
+    - 'コマンドの用意': 'terraform/command.md'
+    - 'VPCの作成': 'terraform/create-vpc.md'
 
-  # - 'Terraform':
-  #   - '概要': 'terraform/about.md'
-  #   - 'コマンドの用意': 'terraform/command.md'
-  #   - 'VPCの作成': 'terraform/create-vpc.md'
   #   - 'Moduleの使用': 'terraform/module.md'
   # - 'ECS':
   #   - '概要': 'index.md'
