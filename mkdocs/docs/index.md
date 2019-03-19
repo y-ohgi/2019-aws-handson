@@ -6,6 +6,9 @@ ECS, Terraform, Datadogについてハンズオン形式で学ぶドキュメン
 - AWS, Dockerを触ったことがある
 - これからTerraform, Datadogを触ってみようとしている
 
+## 構築する環境
+![aws](imgs/aws.png)
+
 ## Version
 - Docker
     - 18.09.3
@@ -13,8 +16,6 @@ ECS, Terraform, Datadogについてハンズオン形式で学ぶドキュメン
     - 1.23.2
 
 ## 必要な環境
-- AWSアカウント
 - Docker for Mac/Windows
-
-## 構築する環境
-![aws](imgs/aws.png)
+- AWSアカウント
+- Datadog アカウント
