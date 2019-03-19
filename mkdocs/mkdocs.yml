@@ -41,12 +41,12 @@ nav:
     - '概要': 'terraform/about.md'
     - 'コマンドの用意': 'terraform/command.md'
     - 'ハンズオン': 'terraform/handson.md'
+  - 'ECS':
+    - '概要': 'ecs/index.md'
+    - 'ハンズオンの環境構築': 'ecs/provisioning.md'
+    - 'docker-composeで動作確認をする': 'ecs/docker-compose.md'
 
-  # - 'ECS':
-  #   - '概要': 'index.md'
-  #   - 'Nginxを起動する': 'index.md'
-  #   - 'Laravelを起動する(ローカル)': 'index.md'
-  #   - 'Laravelを起動する(ECS)': 'index.md'
+  #   - 'LaravelをECSで動かす': 'ecs/laravel.md'
   # - 'Datadog':
   #   - '概要': 'index.md'
   #   - 'docker-composeで起動': 'index.md'
