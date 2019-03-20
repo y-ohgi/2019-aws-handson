@@ -113,10 +113,6 @@ $ aws ssm put-parameter --name "/handson/app/key" --value ${LARAVEL_APP_KEY} --t
         ],
         "environment": [
             {
-                "name": "APP_DEBUG",
-                "value": "true"
-            },
-            {
                 "name": "APP_ENV",
                 "value": "${app_env}"
             },
@@ -158,10 +154,9 @@ data "template_file" "container_definitions" {
     region     = "${data.aws_region.current.name}"
     name       = "${var.name}"
 
-+   app_env = "staging"
++   app_env = "production"
   }
 }
-
 ```
 
 ### ParameterStoreの値を環境変数へ展開
@@ -170,6 +165,10 @@ ECSではParameterStoreの値を直接呼び出すことが可能できます。
 
 ```json
 "secrets": [
+    {
+        "name": "APP_ENV",
+        "value": "${app_env}"
+    },
     {
         "name": "APP_KEY",
         "valueFrom": "/handson/app/key"
