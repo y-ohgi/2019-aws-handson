@@ -42,12 +42,13 @@ nav:
     - 'コマンドの用意': 'terraform/command.md'
     - 'ハンズオン': 'terraform/handson.md'
   - 'ECS':
-    - '概要': 'ecs/index.md'
+    # - '概要': 'ecs/index.md'
     - 'ハンズオンの環境構築': 'ecs/provisioning.md'
     - 'docker-composeで動作確認をする': 'ecs/docker-compose.md'
     - 'LaravelをECSで動かす': 'ecs/laravel.md'
+    - 'Auroraと連携': 'ecs/aurora.md'
   - 'Datadog':
-    - '概要': 'datadog/index.md'
+    # - '概要': 'datadog/index.md'
     - 'docker-composeで起動': 'datadog/docker-compose.md'
-    - 'AWSとの連携': 'datadog/aws.md'
+    # - 'AWSとの連携': 'datadog/aws.md'
     - 'ECSとの連携': 'datadog/ecs.md'

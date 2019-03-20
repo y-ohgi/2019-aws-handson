@@ -143,6 +143,7 @@ $ aws ssm put-parameter --name "/handson/app/key" --value ${LARAVEL_APP_KEY} --t
 `terraform/main.tf` で `${app_env}` で実際の値を定義します。  
 ここは実際の環境ではterraform側も変数化したほうが良いですが、今回はTerraformの入門ということでTerraform側は決め打ちしてしまいます。
 
+`terraform/main.tf`
 ```diff
 data "template_file" "container_definitions" {
   template = "${file("container_definitions.json")}"
