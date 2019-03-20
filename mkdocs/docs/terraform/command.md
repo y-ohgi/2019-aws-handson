@@ -68,7 +68,8 @@ $ docker run \
     -e AWS_SECRET_ACCESS_KEY=<AWS SECRET ACCESS KEY> \
     -v $(pwd):/templates \
     -w /templates \
-    hashicorp/terraform:0.11.12 bash
+    --entrypoint=ash \
+    hashicorp/terraform:0.11.12
 ```
 
 これでTerraformの実行環境が手に入りました
