@@ -52,3 +52,4 @@ nav:
     - 'docker-composeで起動': 'datadog/docker-compose.md'
     - 'ECSとの連携': 'datadog/ecs.md'
     - 'AWSとの連携': 'datadog/aws.md'
+  - '片付け': 'cleanup/index.md'
