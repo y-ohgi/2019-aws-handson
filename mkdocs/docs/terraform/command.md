@@ -67,6 +67,7 @@ $ docker run \
     -e AWS_SECRET_ACCESS_KEY=<AWS SECRET ACCESS KEY> \
     -v $(pwd):/templates \
     -w /templates \
+    -it \
     --entrypoint=ash \
     hashicorp/terraform:0.11.12
 ```
