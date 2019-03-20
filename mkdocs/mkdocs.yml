@@ -48,7 +48,7 @@ nav:
     - 'LaravelをECSで動かす': 'ecs/laravel.md'
     - 'Auroraと連携': 'ecs/aurora.md'
   - 'Datadog':
-    # - '概要': 'datadog/index.md'
+    - '概要': 'datadog/index.md'
     - 'docker-composeで起動': 'datadog/docker-compose.md'
     # - 'AWSとの連携': 'datadog/aws.md'
     - 'ECSとの連携': 'datadog/ecs.md'
