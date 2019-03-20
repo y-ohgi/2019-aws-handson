@@ -37,7 +37,7 @@ $ aws ssm put-parameter --name "/handson/datadog/key" --value ${DD_API_KEY} --ty
 +  },
 +  {
 +    "name": "datadog",
-+    "image": "datadog/agent:${dd_image_tag}",
++    "image": "datadog/agent",
 +    "cpu": 10,
 +    "memory": 256,
 +    "logConfiguration": {
@@ -51,7 +51,7 @@ $ aws ssm put-parameter --name "/handson/datadog/key" --value ${DD_API_KEY} --ty
 +    "secrets": [
 +      {
 +        "name": "DD_API_KEY",
-+        "valueFrom": "/handson/datadog/key_"
++        "valueFrom": "/handson/datadog/key"
 +      }
 +    ],
 +    "environment": [
