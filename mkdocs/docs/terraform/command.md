@@ -63,7 +63,6 @@ $ cd ~/Desktop/terraform
 また、ホストのカレントディレクトリをコンテナ上へマウント( `-v $(pwd):/templates` )してファイルの共有を行います。
 ```
 $ docker run \
-    --name tf \
     -e AWS_ACCESS_KEY_ID=<AWS ACCESS KEY> \
     -e AWS_SECRET_ACCESS_KEY=<AWS SECRET ACCESS KEY> \
     -v $(pwd):/templates \

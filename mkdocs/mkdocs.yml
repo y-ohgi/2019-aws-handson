@@ -45,10 +45,9 @@ nav:
     - '概要': 'ecs/index.md'
     - 'ハンズオンの環境構築': 'ecs/provisioning.md'
     - 'docker-composeで動作確認をする': 'ecs/docker-compose.md'
-
-  #   - 'LaravelをECSで動かす': 'ecs/laravel.md'
-  # - 'Datadog':
-  #   - '概要': 'index.md'
-  #   - 'docker-composeで起動': 'index.md'
-  #   - 'AWSとの連携': 'index.md'
-  #   - 'ECSとの連携': 'index.md'
+    - 'LaravelをECSで動かす': 'ecs/laravel.md'
+  - 'Datadog':
+    - '概要': 'datadog/index.md'
+    - 'docker-composeで起動': 'datadog/docker-compose.md'
+    - 'AWSとの連携': 'datadog/aws.md'
+    - 'ECSとの連携': 'datadog/ecs.md'
