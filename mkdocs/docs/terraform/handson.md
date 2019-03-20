@@ -270,7 +270,7 @@ resource "aws_eip" "nat_1c" {
   vpc = true
 
   tags = {
-    Name = "${var.name}_1a"
+    Name = "${var.name}_1c"
   }
 }
 
@@ -278,7 +278,7 @@ resource "aws_eip" "nat_1d" {
   vpc = true
 
   tags = {
-    Name = "${var.name}_1a"
+    Name = "${var.name}_1d"
   }
 }
 
