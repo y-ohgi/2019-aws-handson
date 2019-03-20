@@ -59,7 +59,7 @@ $ cd 2019-aws-handson
 ## ECR
 
 ### Registryの作成
-まずはECRへアクセスし、「Get Started」からDockerレジストリの作成を開始します
+まずはECRへアクセスし、「Get Started」からDockerレジストリの作成を開始します。
 
 [Amazon ECR](https://ap-northeast-1.console.aws.amazon.com/ecr/get-started?region=ap-northeast-1)
 ![top](imgs/ecr-top.png)
@@ -136,14 +136,14 @@ $ docker push ${ECR_URI_HANDSON_NGINX}
 実際に図のAWSの環境を構築していきます。
 
 ### Terraformの初期化
-Terraform用ディレクトリにチェックアウトし、初期化を行います
+Terraform用ディレクトリにチェックアウトし、初期化を行います。
 ```
 $ cd terraform
 $ ls
 main.tf
 ```
 
-Dockerからterraformを立ち上げます
+Dockerからterraformを立ち上げます。
 ```
 $ docker run \
     -e AWS_ACCESS_KEY_ID=<AWS ACCESS KEY> \
