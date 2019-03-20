@@ -27,6 +27,7 @@ COPY . .
 
 RUN set -x \
     && composer install --no-progress --no-dev \
+    && php artisan config:clear \
     && addgroup ${GNAME} -g ${GID} \
     && adduser -D -G ${GNAME} -u ${UID} ${UNAME} \
     && chown -R ${UNAME}:${GNAME} ${WORKDIR} \
