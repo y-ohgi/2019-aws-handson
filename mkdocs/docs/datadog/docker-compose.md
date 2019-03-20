@@ -76,4 +76,12 @@ APMを使うことでローカルでもスロークエリの発見や分散ト�
 
 [https://app.datadoghq.com/apm/services](https://app.datadoghq.com/apm/services)
 
-![apm](imgs/dd-apm.png)
+APM一覧に入ったあとは画面上部の `env` から自分の名前を選択します。
+
+![apm services](imgs/dd-apm-services.png)
+
+APMは様々な情報を取得することができます。  
+この機会にDatadog APM にどのような機能があるのか見てみましょう。
+
+e.g.  
+![apm trace](imgs/dd-apm-trace.png)
