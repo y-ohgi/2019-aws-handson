@@ -1,6 +1,9 @@
-## Datadogとは
+
+![logo](imgs/dd-logo.png)
+
+## できること
 - 各種メトリクスの取得
-- AWS自体のモニタリング
+- プロセスの監視
 - 外形監視
 - Dockerの監視
 - APM

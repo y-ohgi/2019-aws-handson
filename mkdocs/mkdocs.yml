@@ -50,5 +50,5 @@ nav:
   - 'Datadog':
     - '概要': 'datadog/index.md'
     - 'docker-composeで起動': 'datadog/docker-compose.md'
-    # - 'AWSとの連携': 'datadog/aws.md'
     - 'ECSとの連携': 'datadog/ecs.md'
+    - 'AWSとの連携': 'datadog/aws.md'

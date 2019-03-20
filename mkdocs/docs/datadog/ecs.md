@@ -30,4 +30,53 @@ $ aws ssm put-parameter --name "/handson/datadog/key" --value ${DD_API_KEY} --ty
 
 ## コンテナ定義へDatadogコンテナを追加
 今回は一箇所変更するだけです。  
-`terraform/container_definitions.json` へDatadogコンテナを追加します。
+`terraform/container_definitions.json` の最後にDatadogコンテナの定義を追記します。
+
+```diff
+-  }
++  },
++  {
++    "name": "datadog",
++    "image": "datadog/agent:${dd_image_tag}",
++    "cpu": 10,
++    "memory": 256,
++    "logConfiguration": {
++      "logDriver": "awslogs",
++      "options": {
++        "awslogs-region": "${region}",
++        "awslogs-group": "/${name}/ecs",
++        "awslogs-stream-prefix": "datadog"
++      }
++    },
++    "secrets": [
++      {
++        "name": "DD_API_KEY",
++        "valueFrom": "${dd_api_key}"
++      }
++    ],
++    "environment": [
++      {
++        "name": "DD_APM_ENABLED",
++        "value": "true"
++      },
++      {
++        "name": "ECS_FARGATE",
++        "Value": "true"
++      },
++      {
++        "name": "DD_TAGS",
++        "value": "env:${env}"
++      }
++    ]
++  }
+]
+```
+
+## デプロイ
+terraformを立ち上げているコンテナに戻り、 `apply` でデプロイを行います。
+
+```
+$ terrraform apply
+```
+
+少し時間を置いてから出力されたDNSへアクセスしてみましょう。
