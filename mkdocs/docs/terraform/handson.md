@@ -60,7 +60,7 @@ $ terraform init
 ![terraform init](imgs/terraform-init.png)
 
 ### プロビジョニング
-Terraformは非常順でdry-run機能を備えています。  
+Terraformは標準でdry-run機能を備えています。  
 極めて厳密というわけではありませんが、コードと現在の環境を比較してプロビジョニング結果を予測してくれます。  
 プロビジョニングの前に使用すると良いでしょう。  
 
@@ -83,7 +83,7 @@ $ terraform apply
     - AWSのリソース上限に達していませんか？
 
 ### Webコンソールで確認
-実際にAWSのWebコンソールへアクセスし、 `aws-handson` とい名前のVPCが作成されたか確認してみましょう。
+実際にAWSのWebコンソールへアクセスし、 `aws-handson` という名前のVPCが作成されたか確認してみましょう。
 
 [https://ap-northeast-1.console.aws.amazon.com/vpc/home?region=ap-northeast-1](https://ap-northeast-1.console.aws.amazon.com/vpc/home?region=ap-northeast-1)
 
@@ -193,7 +193,7 @@ resource "aws_route_table_association" "public_1d" {
 
 ### プロビジョニングの実行と確認
 
-`plan` コマンドでコードに問題がないこを確認します。  
+`plan` コマンドでコードに問題がないことを確認します。  
 このときにTerraformはAWSの環境との差分を比較し、どのリソースを作成するか表示してくれます。  
 VPCは作成されず、Internet Gateway, Route Table , Public Subnet x3 , Route x4 、の計 **9つのリソース** が新しく追加されることを確認してください。
 

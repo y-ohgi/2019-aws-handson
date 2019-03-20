@@ -8,7 +8,7 @@ Infrastructure as Code は既に聞き慣れた単語かも知れません。
 ![terraform](imgs/terraform-logo.png)
 
 TerraformはHashiCorp社製のOSS IaC ツールです。  
-AWSにもCloudFormationという素晴らしいマネージドサービスがありますが、Terraformは復数のベンダー(AWS, GCP, Azure, Datadog, etc...)へ対応しています。  
+AWSにもCloudFormationという素晴らしいマネージドサービスがありますが、Terraformは複数のベンダー(AWS, GCP, Azure, Datadog, etc...)へ対応しています。  
 OSSということで"自前でパッチを当てて使う"ということも可能です。  
 
 また、Terraformの特徴的な機能として **再利用性** を担保するModuleという機能があります。  
