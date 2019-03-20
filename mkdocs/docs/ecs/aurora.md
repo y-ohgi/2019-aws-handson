@@ -50,7 +50,11 @@ LaravelとAurora(MySQL)を連携を行います。
 +       },
 +       {
 +           "name": "DB_DATABASE",
-+           "valueFrom": "handson"
++           "value": "handson"
++       },
++       {
++           "name": "DB_DATABASE",
++           "value": "handson"
 +       }
     ]
 }
