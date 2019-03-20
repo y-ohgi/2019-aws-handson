@@ -48,7 +48,7 @@ data "aws_ssm_parameter" "db_password" {
 module "sg_db" {
   source = "./modules/security-group"
 
-  name   = "${var.name}_alb"
+  name   = "${var.name}_db"
   vpc_id = "${module.vpc.vpc_id}"
 
   ingress_with_cidr_block_rules = [
@@ -147,7 +147,7 @@ data "template_file" "container_definitions" {
 module "sg_ecs_service" {
   source = "./modules/security-group"
 
-  name   = "${var.name}_alb"
+  name   = "${var.name}_ecs_service"
   vpc_id = "${module.vpc.vpc_id}"
 
   ingress_with_cidr_block_rules = [
