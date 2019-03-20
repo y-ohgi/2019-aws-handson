@@ -163,6 +163,23 @@ $ terraform apply
 
 RDSのプロビジョニングに時間がかかるため、15分ほど待ちます。  
 
+#### 作成されるサービス・リソースのコンソールへのリンク
+
+![aws](../imgs/aws.png)
+
+今回使用するAWSサービスのコンソールへのリンクです。  
+Terraform実行中の場合まだ作成されていないリソースもあるかとおもいます。
+
+- VPC
+    - ネットワークを司るサービスです
+    - [https://ap-northeast-1.console.aws.amazon.com/vpc/home?region=ap-northeast-1](https://ap-northeast-1.console.aws.amazon.com/vpc/home?region=ap-northeast-1)
+- ECS
+    - [https://ap-northeast-1.console.aws.amazon.com/ecs/home?region=ap-northeast-1#/clusters](https://ap-northeast-1.console.aws.amazon.com/ecs/home?region=ap-northeast-1#/clusters)
+- Parameter Store
+    - [https://ap-northeast-1.console.aws.amazon.com/systems-manager/parameters?region=ap-northeast-1](https://ap-northeast-1.console.aws.amazon.com/systems-manager/parameters?region=ap-northeast-1)
+- RDS
+    - [https://ap-northeast-1.console.aws.amazon.com/rds/home?region=ap-northeast-1#](https://ap-northeast-1.console.aws.amazon.com/rds/home?region=ap-northeast-1#)
+
 ### 環境の確認
 Terraformのプロビジョニングが完了するとDNSが表示されるのでアクセスして動作確認をしましょう。  
 

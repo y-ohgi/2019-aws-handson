@@ -51,7 +51,7 @@ $ aws ssm put-parameter --name "/handson/datadog/key" --value ${DD_API_KEY} --ty
 +    "secrets": [
 +      {
 +        "name": "DD_API_KEY",
-+        "valueFrom": "${dd_api_key}"
++        "valueFrom": "/handson/datadog/key_"
 +      }
 +    ],
 +    "environment": [
