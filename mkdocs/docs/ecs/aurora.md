@@ -96,7 +96,32 @@ migration結果の確認
 $ curl <YOUR DNS NAME>/api/books
 []
 $ curl -X POST <YOUR DNS NAME>/api/books
-
+{
+    "title": "tmp title",
+    "updated_at": "2019-03-20 09:34:00",
+    "created_at": "2019-03-20 09:34:00",
+    "id": 1
+}
+$ curl -X POST <YOUR DNS NAME>/api/books
+{
+    "title": "tmp title",
+    "updated_at": "2019-03-20 09:34:00",
+    "created_at": "2019-03-20 09:34:00",
+    "id": 2
+}
 $ curl <YOUR DNS NAME>/api/books
-[]
+[
+    {
+        "id": 1,
+        "title": "tmp title",
+        "created_at": "2019-03-20 09:33:53",
+        "updated_at": "2019-03-20 09:33:53"
+    },
+    {
+        "id": 2,
+        "title": "tmp title",
+        "created_at": "2019-03-20 09:34:00",
+        "updated_at": "2019-03-20 09:34:00"
+    }
+]
 ```
