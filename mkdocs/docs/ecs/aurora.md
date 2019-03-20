@@ -96,4 +96,7 @@ migration結果の確認
 $ curl <YOUR DNS NAME>/api/books
 []
 $ curl -X POST <YOUR DNS NAME>/api/books
+
+$ curl <YOUR DNS NAME>/api/books
+[]
 ```
