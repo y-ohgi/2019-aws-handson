@@ -18,7 +18,7 @@ class BooksController extends Controller
     public function store()
     {
         $book = new Book();
-        $book->title = Faker::create()->name();
+        $book->title = "tmp title"; // Faker::create()->name();
         $book->save();
 
         return response()->json($book);
