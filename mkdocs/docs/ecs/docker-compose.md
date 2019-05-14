@@ -1,11 +1,12 @@
 ## 概要
-このハンズオンではLaravelをECS上で動かします。  
-その前に、ローカルでLaravelがどのような動きをするのかdocker-composeで確認しましょう。
+![docker-compose](./imgs/docker-compose.png)
+
+ECSの前に、まずはローカルでdocker-composeを用いてLaravelを動かしてみましょう
 
 ## docker-compose up
 ハンズオンのディレクトリへ移動してdocker-composeで起動してみましょう。  
 
-```
+```console
 $ cd /path/to/2019-aws-handson
 $ docker-compose up
 ```
@@ -23,7 +24,7 @@ LaravelとMySQLを接続します。
 まずはmigrateの実行を行います。  
 既に起動しているDockerコンテナの中で `php` コマンドを打ってmigrateを行います。
 
-```
+```console
 $ cd /path/to/2019-aws-handson/
 $ docker-compose exec app php artisan migrate
 ```
@@ -33,46 +34,45 @@ $ docker-compose exec app php artisan migrate
 ## APIの動作確認
 まずは `/api/books` のパスにアクセスして、何も帰ってこないことを確認します。  
 
-```
+```console
 $ curl localhost:8001/api/books
 []
 ```
 
 何回かPOSTリクエストを送って、データを増やしてみます。  
-```
+```console
 $ curl -X POST localhost:8001/api/books
 {
-  "title": "Ramiro Bernhard",
-  "updated_at": "2019-03-20 04:59:05",
-  "created_at": "2019-03-20 04:59:05",
+  "title": "tmp title",
+  "updated_at": "2019-05-14 10:35:39",
+  "created_at": "2019-05-14 10:35:39",
   "id": 1
 }
 $ curl -X POST localhost:8001/api/books
 {
-  "title": "Ramiro Bernhard",
-  "updated_at": "2019-03-20 04:59:05",
-  "created_at": "2019-03-20 04:59:05",
+  "title": "tmp title",
+  "updated_at": "2019-05-14 10:35:39",
+  "created_at": "2019-05-14 10:35:39",
   "id": 2
 }
-   :
 ```
 
 最後に `/api/books` へGETリクエストを送り、MySQLへデータが格納されていることを確認します。
 
-```
+```console
 $ curl localhost:8001/api/books
 [
   {
     "id": 1,
-    "title": "Ramiro Bernhard",
-    "created_at": "2019-03-20 04:59:05",
-    "updated_at": "2019-03-20 04:59:05"
+    "title": "tmp title",
+    "created_at": "2019-05-14 10:35:34",
+    "updated_at": "2019-05-14 10:35:34"
   },
   {
     "id": 2,
-    "title": "Mr. Ford Nitzsche",
-    "created_at": "2019-03-20 05:00:36",
-    "updated_at": "2019-03-20 05:00:36"
+    "title": "tmp title",
+    "created_at": "2019-05-14 10:35:39",
+    "updated_at": "2019-05-14 10:35:39"
   }
 ]
 ```
@@ -80,7 +80,7 @@ $ curl localhost:8001/api/books
 ## MySQLの中に入ってみる
 Dockerコンテナ上で動かしているMySQLへログインしてみます。  
 
-```
+```console
 $ docker-compose exec mysql mysql
 Your MySQL connection id is 8
 Server version: 5.7.25 MySQL Community Server (GPL)
@@ -99,7 +99,7 @@ mysql>
 MySQLの公式Docker Image はデフォルトで `mysql` というデータベースが作成されます。今回は特に何も設定せず、デフォルトの `mysql` データベースを使用しています。  
 MySQLコンテナの中に入り、 `mysql` データベースのテーブルを一覧してみましょう。
 
-```
+```console
 mysql> use mysql
 Reading table information for completion of table and column names
 You can turn off this feature to get a quicker startup with -A

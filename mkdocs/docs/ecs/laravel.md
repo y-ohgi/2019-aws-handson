@@ -8,39 +8,34 @@ GUIをポチポチするのがそろそろしんどくなってきたころだ�
 
 `nginx` と `app` の2つのリポジトリを作成します。
 
-```
+```console
 $ aws ecr create-repository --repository-name nginx
 $ aws ecr create-repository --repository-name app
 ```
 
-作成されたかの確認
+作成されたか、レジストリを一覧してみます。  
+`nginx` , `handson-nginx` , `app` の3つが存在していれば完了です。
 
-```
+```console
 $ aws ecr describe-repositories --query 'repositories[].repositoryName'
 [
     "nginx",
     "handson-nginx",
     "app"
 ]
-$
 ```
 
 ### Dockerのビルドとpush
-ハンズオンリポジトリへチェックアウト (適宜)
-
-```
-$ cd /path/to/2019-aws-handson
-```
 
 nginxのビルドとpush
-```
+```console
 $ export ECR_URI_NGINX=$(aws ecr describe-repositories --repository-names nginx --query 'repositories[0].repositoryUri' --output text)
 $ docker build -t ${ECR_URI_NGINX} -f docker/nginx/Dockerfile .
 $ docker push ${ECR_URI_NGINX}
 ```
 
 Laravelのビルドとpush
-```
+```consoel
 $ export ECR_URI_APP=$(aws ecr describe-repositories --repository-names app --query 'repositories[0].repositoryUri' --output text)
 $ docker build -t ${ECR_URI_APP} .
 $ docker push ${ECR_URI_APP}
@@ -49,16 +44,17 @@ $ docker push ${ECR_URI_APP}
 ## Laravel用の暗号化キーを生成・登録
 Laravelでは起動時に暗号化キーが必要なので、その生成と登録を行います。  
 
-docker-composeからphpコマンドを叩き、暗号化キーを生成します。
-```
+docker-composeからphpコマンドを叩き、暗号化キーを生成し、変数へ展開します。
+```console
 $ docker-compose run app php artisan key:generate --show
 base64:Qg1++xxxxxxxxxxxxxxxx=
-$ export LARAVEL_APP_KEY=base64:Qg1++xxxxxxxxxxxxxxxx=
+$ LARAVEL_APP_KEY=base64:Qg1++xxxxxxxxxxxxxxxx=
 ```
 
-DBの接続情報でも使用した "ParameterStore" へ暗号化キーを `handson/app/key` という命名で登録します。  
+DBの接続情報でも使用した "ParameterStore" で暗号化キーも使用します。 
+`handson/app/key` という命名でキーを登録します。  
 
-```
+```console
 $ aws ssm put-parameter --name "/handson/app/key" --value ${LARAVEL_APP_KEY} --type String
 {
     "Version": 1
@@ -132,6 +128,7 @@ $ aws ssm put-parameter --name "/handson/app/key" --value ${LARAVEL_APP_KEY} --t
 `APP_ENV` は変数としてTerraformの呼び出し時に動的に与えます。
 
 ```json
+  :
 "environment": [
    {
      "name": "LOG_CHANNEL",
@@ -162,7 +159,7 @@ data "template_file" "container_definitions" {
 
 ### ParameterStoreの値を環境変数へ展開
 ECSではParameterStoreの値を直接呼び出すことが可能できます。  
-今回はその機能を使用して、ParameterStoreに登録した暗号化キーをECSで起動したコンテナの環境変数へ展開しています。
+今回はその機能を使用して、ParameterStoreに登録した暗号化キーをECSで起動したコンテナの環境変数へ展開します。
 
 ```json
 "secrets": [
@@ -180,7 +177,7 @@ ECSではParameterStoreの値を直接呼び出すことが可能できます。
 ## デプロイ
 このハンズオンではTerraformでECSを管理しているため、terraformからデプロイを実行します。
 
-```
+```console
 $ terraform apply
 ```
 

@@ -2,27 +2,23 @@
 
 ![aws](../imgs/aws.png)
 
-AZ・RouteTable・SecurityGroupなどは省略していますが、上記の環境を目標に構築していきます。
+(AZ・RouteTable・SecurityGroupなどは省略していますが、) 上記の環境を目標に構築していきます。
 
 ## ハンズオン環境の構築
 
 ![aws](imgs/aws.png)
 
-基本的にTerraformで構築しますが、ParameterStoreとECRだけ手動で構築します。  
-ParameterStoreはDBのユーザー名/パスワードのデフォルト値を格納したいため、  
-ECRはTerraformのプロビジョニング時にECSを同時に動かしたいためです。
+Terraformで環境構築を行いますが、ParameterStoreとECRだけ手動で構築します。  
 
 ## ParameterStore
 ParameterStoreはAWSのサービスの1つで、シークレット情報や設定情報を管理するためのサービスです。  
-このハンズオンでは **"DBのユーザー名"** と **"DBのパスワード"** をParameterStoreで管理します。  
 
-まずはWebコンソールへ接続してください。  
+このハンズオンではAurora(AWSのマネージドDB)の初回起動時に作成される **"DBのユーザー名"** と **"DBのパスワード"** をParameterStoreへ登録します。  
+早速パラメータを登録してみましょう。  
 [AWS Systems Manager - Parameter Store](https://ap-northeast-1.console.aws.amazon.com/systems-manager/parameters?region=ap-northeast-1)
 ![top](imgs/ssm-top.png)
 
-### ユーザー名の登録
-
-
+### DBユーザー名の登録
 まずはユーザー名を登録します。  
 名前を `/handson/db/username` で登録し、値は任意の文字列を入力してください  (1 ~ 16文字の英数字を使用する必要があります)。  
 ここでは `myusername` とします。
@@ -31,30 +27,54 @@ ParameterStoreはAWSのサービスの1つで、シークレット情報や設�
 
 ![create](imgs/ssm-create.png)
 
-### パスワードの登録
+### DBパスワードの登録
 
 続いてパスワードを登録します。  
-名前を `/handson/db/password` で登録し、値は任意の文字列を入力してください (8文字以上の英数字を使用する必要があります)。
+名前を `/handson/db/password` で登録し、値は任意の文字列を入力してください (8文字以上の英数字を使用する必要があります)。  
 ここでは `mypassword` とします。
 
 ![password](imgs/ssm-password.png)
 
 ## 登録情報の確認
 
-最後に `/handson/db/username` と `/handson/db/password` が登録していることを確認してParameterStoreの操作は完了です。  
+`/handson/db/username` と `/handson/db/password` が登録していることを確認できたら完了です。  
 
 ![confirm](imgs/ssm-confirm.png)
 
 
----
-
-## ハンズオン用リポジトリのclone
-ローカルへハンズオン用リポジトリのcloneをします。
+## GitHubからサンプルコードのpull
+このハンズオンではLaravelをECSで動かします。  
+今回はDocker対応させたLaravelのサンプルコードを用意しているので、ローカルへpullして使用してください。
 
 ```
+$ cd /path/to/your/directory/
 $ git clone https://github.com/y-ohgi/2019-aws-handson.git
-$ cd 2019-aws-handson
+$ cd 2019-aws-handson/laravel
 ```
+
+docker-composeでLaravelの動作確認をしてみましょう。
+```
+$ docker-compose up
+```
+
+[http://localhost:8001](http://localhost:8001) へアクセスし、Laravelが起動できていることを確認しましょう。  
+
+```console
+$ curl -I localhost:8001
+HTTP/1.1 200 OK
+Server: nginx/1.15.12
+Content-Type: text/html; charset=UTF-8
+Connection: keep-alive
+Cache-Control: no-cache, private
+Date: Tue, 14 May 2019 10:21:48 GMT
+Set-Cookie: XSRF-TOKEN=eyJpdiI6Im5CSHRJNEVrXC9aU1VLZ3lzcTl3ZnhRPT0iLCJ2YWx1ZSI6IjQ2bTZPOElYQ3JTbTgrMVhDdGJuK3I1dG43UkRtbEVoeG84WUE3XC80M3V3YnM0UkRTRFdrSXdLb21NaXBQXC9xNSIsIm1hYyI6ImEwYmJlYjEyZTgzYzMyNTFhM2Y1NDQ4ZTBmYzhiODE1MmY3YjQwNTBlNjdlNWE5YzRiZDY2ZTBkNWZkN2Q0ZjkifQ%3D%3D; expires=Tue, 14-May-2019 12:21:48 GMT; Max-Age=7200; path=/
+Set-Cookie: handson_session=eyJpdiI6ImlJbTk0cTdNWFYxMysydFZGaVwvK2N3PT0iLCJ2YWx1ZSI6IkVzaElLNGMwVVFnS25xeXNUdmlOY0E0SCtQSHNsVzJ1OUd5Z0ZTaXQ2XC9IYnBuWnpKeUUybTA4ZktxSVJJb3htIiwibWFjIjoiZGMzYTk3ZmE0YmY4M2I5ODMxMWMyZDI4ZTQ0MjFiNzA4NGMxZmY5YTc3MzM4ZjhiNjc3YWI2OGYzMzFiNDljYiJ9; expires=Tue, 14-May-2019 12:21:48 GMT; Max-Age=7200; path=/; httponly
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+```
+
+アクセスできていることが確認できたらdocker-composeを停止させてしまいましょう。
 
 ## ECR
 
@@ -68,25 +88,26 @@ $ cd 2019-aws-handson
 
 ![create](imgs/ecr-create.png)
 
-レジストリの作成が完了しました！  
-ここに表示されているURIはDocker Image をpushするときに必要なので控えておきます。
+これでレジストリの作成は完了です。
+
+また、以下に表示されているURIはDocker Image をpushするときに必要なので控えておきましょう。
 
 ![confirm](imgs/ecr-confirm.png)
 
 
-### Docker Build
+### Build & Push
 DockerのBuildを実行します。  
-先程控えたURIを使用してECRへビルドしたDocker Image をpushします。
+その際タグ名にECRのURIを設定する点に注意してください。
 
-```
-$ export ECR_URI_HANDSON_NGINX=<YOUR ECR REGISTRY URI> # 先程控えたURIを環境変数へ展開します。
+```console
+$ ECR_URI_HANDSON_NGINX=<YOUR ECR REGISTRY URI> # 先程控えたECRのレジストリURIを変数として展開
 $ docker build \
     -t ${ECR_URI_HANDSON_NGINX} \
     -f docker/handson-nginx/Dockerfile \
     docker/handson-nginx
 ```
 
-dockerを立ち上げてnginxが立ち上がるか確認してみましょう
+ビルドしたdockerを立ち上げてnginxが立ち上がるか確認してみましょう
 ```
 $ docker run -p 8080:80 ${ECR_URI_HANDSON_NGINX}
 ```
@@ -125,9 +146,10 @@ $ docker push ${ECR_URI_HANDSON_NGINX}
 ![ecr-handson-nginx.png](imgs/ecr-handson-nginx.png)
 
 
-!!! warning "no basic auth credentials"
-    `docker push` 後に"no basic auth credentials"と表示される場合、aws cliでログインしているアカウントが異なっています。  
-    現在のdefault profile がどのアカウントのものになっているか確認してから `$` を行います
+!!! warning "エラー: no basic auth credentials"
+    `docker push` 後に"no basic auth credentials"とエラーが表示される場合、aws cliでログインしているアカウントが異なっています。  
+    現在のaws cliの profile がどのアカウントのものになっているか確認を行ってください。  
+    e.g. 現在のAWSアカウントIDを確認する。 `$ aws sts get-caller-identity --query Account --output text`
 
 ## Terraformでプロビジョニング
 
@@ -169,20 +191,20 @@ RDSのプロビジョニングに時間がかかるため、15分ほど待ちま
 
 ![aws](../imgs/aws.png)
 
-今回使用するAWSサービスのコンソールへのリンクです。  
-Terraform実行中の場合まだ作成されていないリソースもあるかとおもいます。
+以下が今回使用するAWSサービスのWebコンソールへのリンクです。  
+プロビジョニングがどのように実行されているのか、ターミナルを確認しつつWebコンソールを追うと良いでしょう。  
 
 - VPC
     - ネットワークを司るサービスです
     - [https://ap-northeast-1.console.aws.amazon.com/vpc/home?region=ap-northeast-1](https://ap-northeast-1.console.aws.amazon.com/vpc/home?region=ap-northeast-1)
 - ECS
     - [https://ap-northeast-1.console.aws.amazon.com/ecs/home?region=ap-northeast-1#/clusters](https://ap-northeast-1.console.aws.amazon.com/ecs/home?region=ap-northeast-1#/clusters)
-- Parameter Store
-    - [https://ap-northeast-1.console.aws.amazon.com/systems-manager/parameters?region=ap-northeast-1](https://ap-northeast-1.console.aws.amazon.com/systems-manager/parameters?region=ap-northeast-1)
 - RDS
     - [https://ap-northeast-1.console.aws.amazon.com/rds/home?region=ap-northeast-1#](https://ap-northeast-1.console.aws.amazon.com/rds/home?region=ap-northeast-1#)
+- Parameter Store
+    - [https://ap-northeast-1.console.aws.amazon.com/systems-manager/parameters?region=ap-northeast-1](https://ap-northeast-1.console.aws.amazon.com/systems-manager/parameters?region=ap-northeast-1)
 
 ### 環境の確認
-Terraformのプロビジョニングが完了するとDNSが表示されるのでアクセスして動作確認をしましょう。  
+Terraformのプロビジョニングが完了すると、以下のようにDNSが表示されるのでアクセスして動作確認をしましょう。  
 
 ![outputs](imgs/terraform-output-dns.png)  
