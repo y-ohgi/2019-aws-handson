@@ -18,7 +18,7 @@ IAMサービスのトップページからユーザー一覧へアクセス。
 
 ![IAM User Create](imgs/iam-usercreate.png)
 
-ユーザー名を「Terraform」に設定し、「プログラムによるアクセス」を有効化。  
+ユーザー名を「terraform」に設定し、「プログラムによるアクセス」を有効化。  
 「次のステップ:アクセス権限」を押下。
 
 ![IAM input terraform](imgs/iam-inputeusername.png)
