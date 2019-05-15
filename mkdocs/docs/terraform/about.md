@@ -21,25 +21,23 @@ TerraformはInfrastructure as Codeのためのツールです。
 ### Terraform
 このハンズオンで取り扱うツールです。
 
-Hashicorp社（VagrantやVaultなどが代表的。）が開発したOSSのInfrastructure as Codeツールです。  
-RubyライクなHCLというDSLでコードを記述します。
+Hashicorp社（VagrantやVaultなどが代表的。）が開発したOSSのInfrastructure as Codeツールで、  
+AWSのVPC, RDS, ALB, EC2などのOSより下の「AWSの構成管理」をスコープとしています。  
 
-また、TerraformはAWS専用のツールではありません。  
-AWS以外のクラウドであるGCPやAzureでも使用でき、他にもDatadogやHerokuなどの管理を行うことが可能です。  
+また、TerraformはAWS専用のツールではなく、AWS以外のクラウドであるGCPやAzureでも使用でき、他にもDatadogやHerokuなどの管理を行うことが可能です。  
 
 [Providers - Terraform by HashiCorp](https://www.terraform.io/docs/providers/)
 
 ### CloudFormation
-AWSによるAWSのためのAWSのInfrastructure as Codeツール。
+AWSによるAWSのためのAWSのInfrastructure as Codeツールです。
 
 AWSが開発していることもあり、AWSに特化していることが特徴です。  
-JSONもしくはyamlでコードを記述します。
 
-CloudFormationはAWSの1つのサービスなので、ステータスの管理・並列実行・コンフリクトの防止など、煩わしい面をAWS側で行ってくれます。  
+CloudFormationはAWSの1つのサービスなので、ステータスの管理・並列実行・コンフリクト・ローロバックなどの煩わしい面をAWS側で行ってくれます。  
 また、AWSが出すリファレンスアーキテクチャはCloudFormationで記載されていることが多いため、AWSを使う場合は書けなくても読めることが望ましいと筆者は考えています。
 
-### Ansible
-TerraformとCloudFormationは「AWSの構成管理」を責務としていますが、Ansibleその2つとは毛色が違い「OSより上の構成管理」を主に責務としています。  
+### Ansible(Chef)
+TerraformとCloudFormationは「AWSの構成管理」を責務としていますが、Ansible(とChef)はその2つとは毛色が違い「OSより上の構成管理」を主に責務としています。  
 例えば、「どのミドルウェアやコードをインストールして、どのマシンへプロビジョニングする」といったこと行います。  
 
 そのためクラウドとDockerを使うと使用する機会が少ないです。  
