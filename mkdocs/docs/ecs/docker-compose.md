@@ -26,7 +26,6 @@ LaravelとMySQLを接続します。
 既に起動しているDockerコンテナの中で `php` コマンドを打ってmigrateを行います。
 
 ```console
-$ cd /path/to/2019-aws-handson/
 $ docker-compose exec app php artisan migrate
 ```
 
