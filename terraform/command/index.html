@@ -1,0 +1,802 @@
+
+
+
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="クリップボードへコピー">
+      
+        <meta name="lang:clipboard.copied" content="コピーしました">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="何も見つかりませんでした">
+      
+        <meta name="lang:search.result.one" content="1件見つかりました">
+      
+        <meta name="lang:search.result.other" content="#件見つかりました">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-　、。，．]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+    
+    
+      
+        <title>コマンドの用意 - AWS Handson</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.750b69bd.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#7e57c2">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../assets/custom.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#iam" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="AWS Handson" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              AWS Handson
+            </span>
+            <span class="md-header-nav__topic">
+              コマンドの用意
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            検索キーワードを入力してください
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="AWS Handson" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    AWS Handson
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Swarm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Swarm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../swarm/" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../swarm/handson/" title="ハンズオン" class="md-nav__link">
+      ハンズオン
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Terraform
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Terraform
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../about/" title="概要" class="md-nav__link">
+      概要
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        コマンドの用意
+      </label>
+    
+    <a href="./" title="コマンドの用意" class="md-nav__link md-nav__link--active">
+      コマンドの用意
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iam" title="IAMユーザーの作成" class="md-nav__link">
+    IAMユーザーの作成
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="手順" class="md-nav__link">
+    手順
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#terraformdocker" title="terraformをDockerで起動" class="md-nav__link">
+    terraformをDockerで起動
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="基本的なコマンド" class="md-nav__link">
+    基本的なコマンド
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terraform-init" title="$ terraform init" class="md-nav__link">
+    $ terraform init
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terraform-plan" title="$ terraform plan" class="md-nav__link">
+    $ terraform plan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terraform-apply" title="$ terraform apply" class="md-nav__link">
+    $ terraform apply
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terraform-destroy" title="$ terraform destroy" class="md-nav__link">
+    $ terraform destroy
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../handson/" title="ハンズオン" class="md-nav__link">
+      ハンズオン
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      ECS
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        ECS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ecs/docker-compose/" title="docker-composeで動作確認をする" class="md-nav__link">
+      docker-composeで動作確認をする
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ecs/laravel/" title="LaravelをECSで動かす" class="md-nav__link">
+      LaravelをECSで動かす
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ecs/aurora/" title="Auroraと連携" class="md-nav__link">
+      Auroraと連携
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Datadog
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Datadog
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../datadog/" title="概要" class="md-nav__link">
+      概要
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../datadog/docker-compose/" title="docker-composeで起動" class="md-nav__link">
+      docker-composeで起動
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../datadog/ecs/" title="ECSとの連携" class="md-nav__link">
+      ECSとの連携
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../datadog/aws/" title="AWSとの連携" class="md-nav__link">
+      AWSとの連携
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../cleanup/" title="片付け" class="md-nav__link">
+      片付け
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iam" title="IAMユーザーの作成" class="md-nav__link">
+    IAMユーザーの作成
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" title="手順" class="md-nav__link">
+    手順
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#terraformdocker" title="terraformをDockerで起動" class="md-nav__link">
+    terraformをDockerで起動
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="基本的なコマンド" class="md-nav__link">
+    基本的なコマンド
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terraform-init" title="$ terraform init" class="md-nav__link">
+    $ terraform init
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terraform-plan" title="$ terraform plan" class="md-nav__link">
+    $ terraform plan
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terraform-apply" title="$ terraform apply" class="md-nav__link">
+    $ terraform apply
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terraform-destroy" title="$ terraform destroy" class="md-nav__link">
+    $ terraform destroy
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>コマンドの用意</h1>
+                
+                <p><code>terraform</code> コマンドをDockerで用意します。  </p>
+<h2 id="iam">IAMユーザーの作成<a class="headerlink" href="#iam" title="Permanent link">&para;</a></h2>
+<p>まずはAWSのWebコンソールへアクセスしてTerraform実行用のIAMユーザーを作成し、アクセスキーを取得します。</p>
+<h3 id="_1">手順<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>AWS WebコンソールからIAMサービスへアクセス  </p>
+<p><img alt="IAM search" src="../imgs/iam-search.png" /></p>
+<p>IAMサービスのトップページからユーザー一覧へアクセス。  </p>
+<p><img alt="IAM top" src="../imgs/iam-top.png" /></p>
+<p>「ユーザーを追加」を選択し、IAMユーザーの作成開始。</p>
+<p><img alt="IAM User Create" src="../imgs/iam-usercreate.png" /></p>
+<p>ユーザー名を「terraform」に設定し、「プログラムによるアクセス」を有効化。<br />
+「次のステップ:アクセス権限」を押下。</p>
+<p><img alt="IAM input terraform" src="../imgs/iam-inputeusername.png" /></p>
+<p>「既存のポリシーを直接アタッチ」を選択し、「AdministratorAccess」ポリシー(管理者権限)を選択。  <br />
+「次のステップ:タグ」を押下。</p>
+<p><img alt="IAM Policy attach" src="../imgs/iam-policyattach.png" /></p>
+<p>タグは入力せず、そのまま「次のステップ:確認」を押下。</p>
+<p><img alt="IAM tag" src="../imgs/iam-tag.png" /></p>
+<p>「ユーザーの作成」を押下し、IAMユーザーの作成が完了。  </p>
+<p><img alt="IAM confirm" src="../imgs/iam-createconfirm.png" /></p>
+<p>アクセスキーを取得できるので、他人にもれないように控える。</p>
+<p><img alt="IAM access key" src="../imgs/iam-accesskey.png" /></p>
+<div class="admonition シークレットキーをgitへ上げないための保険">
+<p class="admonition-title">シークレットキーをgitへ上げないための保険</p>
+<p>commitの内容をスキャンし、AWSアクセスキーが含まれていたらそのcommitをリジェクトしてくれるツールです。<br />
+保険のためにもAWSを扱うリポジトリでは有効化しておくと良いでしょう。  </p>
+<p><a href="https://github.com/awslabs/git-secrets">awslabs/git-secrets: Prevents you from committing secrets and credentials into git repositories</a></p>
+</div>
+<hr />
+<h2 id="terraformdocker">terraformをDockerで起動<a class="headerlink" href="#terraformdocker" title="Permanent link">&para;</a></h2>
+<p>Dockerの1つのユースケースとして「コマンドのラップ」があります。<br />
+ここではDockerに慣れ親しむためにもDockerでTerraformを起動してみます。</p>
+<p>まずはディレクトリの作成をしてチェックアウトします (Desktopへ"terraform"というディレクトリを作成していますが、適宜修正してください)。</p>
+<div class="codehilite"><pre><span></span>$ mkdir ~/Desktop/terraform
+$ cd ~/Desktop/terraform
+</pre></div>
+
+
+<p>次に、TerraformをDockerで起動します。<br />
+その際に先程取得したIAMユーザーのアクセス情報を渡すことでTerraformがAWSのAPIへアクセスできるようになります。<br />
+また、ホストのカレントディレクトリをコンテナ上へマウント( <code>-v $(pwd):/templates</code> )してファイルの共有を行います。</p>
+<div class="codehilite"><pre><span></span>$ docker run \
+    -e AWS_ACCESS_KEY_ID=&lt;AWS ACCESS KEY&gt; \
+    -e AWS_SECRET_ACCESS_KEY=&lt;AWS SECRET ACCESS KEY&gt; \
+    -v $(pwd):/templates \
+    -w /templates \
+    -it \
+    --entrypoint=ash \
+    hashicorp/terraform:0.11.12
+</pre></div>
+
+
+<p>これでTerraformの実行環境が手に入りました</p>
+<hr />
+<h2 id="_2">基本的なコマンド<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>実際にコードを書く前にどんなコマンドがあるか見ておきましょう。<br />
+Terraformは基本的以下の4つのコマンドで操作します。</p>
+<h3 id="terraform-init"><code>$ terraform init</code><a class="headerlink" href="#terraform-init" title="Permanent link">&para;</a></h3>
+<p>初期化。<br />
+コードが依存するプラグインやModuleをダウンロードします。  </p>
+<p><code>composer install</code> や <code>npm install</code> のようなイメージが近いです。</p>
+<h3 id="terraform-plan"><code>$ terraform plan</code><a class="headerlink" href="#terraform-plan" title="Permanent link">&para;</a></h3>
+<p>dry-run。<br />
+コードとAWSの環境を比較して、プロビジョニング結果を予測してくれます。<br />
+ただし、例外的なケース(AWSのリソース上限など)はplanからは予測できません。</p>
+<h3 id="terraform-apply"><code>$ terraform apply</code><a class="headerlink" href="#terraform-apply" title="Permanent link">&para;</a></h3>
+<p>プロビジョニング。<br />
+記述したコードを実際の環境に適用します。</p>
+<h3 id="terraform-destroy"><code>$ terraform destroy</code><a class="headerlink" href="#terraform-destroy" title="Permanent link">&para;</a></h3>
+<p>削除。<br />
+管理しているリソースを全て削除します。</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../about/" title="概要" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前
+                </span>
+                概要
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../handson/" title="ハンズオン" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  次
+                </span>
+                ハンズオン
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.39abc4af.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../assets/custom.js"></script>
+      
+    
+  </body>
+</html>

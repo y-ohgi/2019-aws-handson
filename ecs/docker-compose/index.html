@@ -1,0 +1,826 @@
+
+
+
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="クリップボードへコピー">
+      
+        <meta name="lang:clipboard.copied" content="コピーしました">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="何も見つかりませんでした">
+      
+        <meta name="lang:search.result.one" content="1件見つかりました">
+      
+        <meta name="lang:search.result.other" content="#件見つかりました">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-　、。，．]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+    
+    
+      
+        <title>docker-composeで動作確認をする - AWS Handson</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.750b69bd.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#7e57c2">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../assets/custom.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="deep-purple" data-md-color-accent="deep-purple">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="AWS Handson" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              AWS Handson
+            </span>
+            <span class="md-header-nav__topic">
+              docker-composeで動作確認をする
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            検索キーワードを入力してください
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="AWS Handson" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    AWS Handson
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Swarm
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Swarm
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../swarm/" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../swarm/handson/" title="ハンズオン" class="md-nav__link">
+      ハンズオン
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Terraform
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Terraform
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../terraform/about/" title="概要" class="md-nav__link">
+      概要
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../terraform/command/" title="コマンドの用意" class="md-nav__link">
+      コマンドの用意
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../terraform/handson/" title="ハンズオン" class="md-nav__link">
+      ハンズオン
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      ECS
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        ECS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        docker-composeで動作確認をする
+      </label>
+    
+    <a href="./" title="docker-composeで動作確認をする" class="md-nav__link md-nav__link--active">
+      docker-composeで動作確認をする
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="概要" class="md-nav__link">
+    概要
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-compose-up" title="docker-compose up" class="md-nav__link">
+    docker-compose up
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql" title="MySQLを使用する" class="md-nav__link">
+    MySQLを使用する
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#migrate" title="migrateの実行" class="md-nav__link">
+    migrateの実行
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" title="APIの動作確認" class="md-nav__link">
+    APIの動作確認
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql_1" title="MySQLの中に入ってみる" class="md-nav__link">
+    MySQLの中に入ってみる
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../laravel/" title="LaravelをECSで動かす" class="md-nav__link">
+      LaravelをECSで動かす
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../aurora/" title="Auroraと連携" class="md-nav__link">
+      Auroraと連携
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Datadog
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Datadog
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../datadog/" title="概要" class="md-nav__link">
+      概要
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../datadog/docker-compose/" title="docker-composeで起動" class="md-nav__link">
+      docker-composeで起動
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../datadog/ecs/" title="ECSとの連携" class="md-nav__link">
+      ECSとの連携
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../datadog/aws/" title="AWSとの連携" class="md-nav__link">
+      AWSとの連携
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../cleanup/" title="片付け" class="md-nav__link">
+      片付け
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目次</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" title="概要" class="md-nav__link">
+    概要
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-compose-up" title="docker-compose up" class="md-nav__link">
+    docker-compose up
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql" title="MySQLを使用する" class="md-nav__link">
+    MySQLを使用する
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#migrate" title="migrateの実行" class="md-nav__link">
+    migrateの実行
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api" title="APIの動作確認" class="md-nav__link">
+    APIの動作確認
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql_1" title="MySQLの中に入ってみる" class="md-nav__link">
+    MySQLの中に入ってみる
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>docker-composeで動作確認をする</h1>
+                
+                <h2 id="_1">概要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><img alt="docker-compose" src="../imgs/docker-compose.png" /></p>
+<p>ECSの前に、まずはローカルでdocker-composeを用いてLaravelを動かしてみましょう</p>
+<h2 id="docker-compose-up">docker-compose up<a class="headerlink" href="#docker-compose-up" title="Permanent link">&para;</a></h2>
+<p>ハンズオンのディレクトリへ移動してdocker-composeで起動してみましょう。  </p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> git clone https://github.com/y-ohgi/2019-aws-handson
+<span class="gp">$</span> <span class="nb">cd</span> <span class="m">2019</span>-aws-handson/laravel
+<span class="gp">$</span> docker-compose up
+</pre></div>
+
+
+<p><a href="http://localhost:8001">http://localhost:8001</a> へアクセスし、Laravelのウェルカムページが表示されれば成功です！</p>
+<p><img alt="Laravel" src="../imgs/laravel.png" /></p>
+<h2 id="mysql">MySQLを使用する<a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h2>
+<p>LaravelとMySQLを接続します。</p>
+<h3 id="migrate">migrateの実行<a class="headerlink" href="#migrate" title="Permanent link">&para;</a></h3>
+<p>起動しているdocker-composeをそのままに、別のターミナルを開いて操作します。</p>
+<p>まずはmigrateの実行を行います。<br />
+既に起動しているDockerコンテナの中で <code>php</code> コマンドを打ってmigrateを行います。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> docker-compose <span class="nb">exec</span> app php artisan migrate
+</pre></div>
+
+
+<p><img alt="imgs/laravel-migrate.png" src="../imgs/laravel-migrate.png" /></p>
+<h2 id="api">APIの動作確認<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>
+<p>まずは <code>/api/books</code> のパスにアクセスして、何も帰ってこないことを確認します。  </p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> curl localhost:8001/api/books
+<span class="go">[]</span>
+</pre></div>
+
+
+<p>何回かPOSTリクエストを送って、データを増やしてみます。  </p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> curl -X POST localhost:8001/api/books
+<span class="go">{</span>
+<span class="go">  &quot;title&quot;: &quot;tmp title&quot;,</span>
+<span class="go">  &quot;updated_at&quot;: &quot;2019-05-14 10:35:39&quot;,</span>
+<span class="go">  &quot;created_at&quot;: &quot;2019-05-14 10:35:39&quot;,</span>
+<span class="go">  &quot;id&quot;: 1</span>
+<span class="go">}</span>
+<span class="gp">$</span> curl -X POST localhost:8001/api/books
+<span class="go">{</span>
+<span class="go">  &quot;title&quot;: &quot;tmp title&quot;,</span>
+<span class="go">  &quot;updated_at&quot;: &quot;2019-05-14 10:35:39&quot;,</span>
+<span class="go">  &quot;created_at&quot;: &quot;2019-05-14 10:35:39&quot;,</span>
+<span class="go">  &quot;id&quot;: 2</span>
+<span class="go">}</span>
+</pre></div>
+
+
+<p>最後に <code>/api/books</code> へGETリクエストを送り、MySQLへデータが格納されていることを確認します。</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> curl localhost:8001/api/books
+<span class="go">[</span>
+<span class="go">  {</span>
+<span class="go">    &quot;id&quot;: 1,</span>
+<span class="go">    &quot;title&quot;: &quot;tmp title&quot;,</span>
+<span class="go">    &quot;created_at&quot;: &quot;2019-05-14 10:35:34&quot;,</span>
+<span class="go">    &quot;updated_at&quot;: &quot;2019-05-14 10:35:34&quot;</span>
+<span class="go">  },</span>
+<span class="go">  {</span>
+<span class="go">    &quot;id&quot;: 2,</span>
+<span class="go">    &quot;title&quot;: &quot;tmp title&quot;,</span>
+<span class="go">    &quot;created_at&quot;: &quot;2019-05-14 10:35:39&quot;,</span>
+<span class="go">    &quot;updated_at&quot;: &quot;2019-05-14 10:35:39&quot;</span>
+<span class="go">  }</span>
+<span class="go">]</span>
+</pre></div>
+
+
+<h2 id="mysql_1">MySQLの中に入ってみる<a class="headerlink" href="#mysql_1" title="Permanent link">&para;</a></h2>
+<p>Dockerコンテナ上で動かしているMySQLへログインしてみます。  </p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> docker-compose <span class="nb">exec</span> mysql mysql
+<span class="go">Your MySQL connection id is 8</span>
+<span class="go">Server version: 5.7.25 MySQL Community Server (GPL)</span>
+
+<span class="go">Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.</span>
+
+<span class="go">Oracle is a registered trademark of Oracle Corporation and/or its</span>
+<span class="go">affiliates. Other names may be trademarks of their respective</span>
+<span class="go">owners.</span>
+
+<span class="go">Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.</span>
+
+<span class="go">mysql&gt;</span>
+</pre></div>
+
+
+<p>MySQLの公式Docker Image はデフォルトで <code>mysql</code> というデータベースが作成されます。今回は特に何も設定せず、デフォルトの <code>mysql</code> データベースを使用しています。<br />
+MySQLコンテナの中に入り、 <code>mysql</code> データベースのテーブルを一覧してみましょう。</p>
+<div class="codehilite"><pre><span></span><span class="go">mysql&gt; use mysql</span>
+<span class="go">Reading table information for completion of table and column names</span>
+<span class="go">You can turn off this feature to get a quicker startup with -A</span>
+
+<span class="go">Database changed</span>
+<span class="go">mysql&gt; show tables;</span>
+<span class="go">+---------------------------+</span>
+<span class="go">| Tables_in_mysql           |</span>
+<span class="go">+---------------------------+</span>
+<span class="go">| books                     |</span>
+<span class="go">| columns_priv              |</span>
+<span class="go">| db                        |</span>
+<span class="go">| engine_cost               |</span>
+<span class="go">| event                     |</span>
+<span class="go">| func                      |</span>
+<span class="go">| general_log               |</span>
+<span class="go">| gtid_executed             |</span>
+<span class="go">| help_category             |</span>
+<span class="go">| help_keyword              |</span>
+<span class="go">| help_relation             |</span>
+<span class="go">| help_topic                |</span>
+<span class="go">| innodb_index_stats        |</span>
+<span class="go">| innodb_table_stats        |</span>
+<span class="go">| migrations                |</span>
+<span class="go">| ndb_binlog_index          |</span>
+<span class="go">| password_resets           |</span>
+<span class="go">| plugin                    |</span>
+<span class="go">| proc                      |</span>
+<span class="go">| procs_priv                |</span>
+<span class="go">| proxies_priv              |</span>
+<span class="go">| server_cost               |</span>
+<span class="go">| servers                   |</span>
+<span class="go">| slave_master_info         |</span>
+<span class="go">| slave_relay_log_info      |</span>
+<span class="go">| slave_worker_info         |</span>
+<span class="go">| slow_log                  |</span>
+<span class="go">| tables_priv               |</span>
+<span class="go">| time_zone                 |</span>
+<span class="go">| time_zone_leap_second     |</span>
+<span class="go">| time_zone_name            |</span>
+<span class="go">| time_zone_transition      |</span>
+<span class="go">| time_zone_transition_type |</span>
+<span class="go">| user                      |</span>
+<span class="go">| users                     |</span>
+<span class="go">+---------------------------+</span>
+<span class="go">35 rows in set (0.00 sec)</span>
+</pre></div>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../terraform/handson/" title="ハンズオン" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前
+                </span>
+                ハンズオン
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../laravel/" title="LaravelをECSで動かす" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  次
+                </span>
+                LaravelをECSで動かす
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.39abc4af.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../assets/custom.js"></script>
+      
+    
+  </body>
+</html>
