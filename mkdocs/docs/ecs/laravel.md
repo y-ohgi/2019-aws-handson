@@ -37,9 +37,24 @@ ParameterStoreはAWSのサービスの1つで、シークレット情報や設�
 
 ### 接続情報が登録されているかの確認
 
-`/handson/db/username` と `/handson/db/password` が登録していることを確認できたら完了です。  
+`/handson/db/username` と `/handson/db/password` が登録していることを確認しましょう。
 
 ![confirm](imgs/ssm-confirm.png)
+
+### DBのデータベース名を登録
+デフォルトで作成されるデータベースの名前を登録します。  
+名前を `/handson/db/name` で登録し、値は任意の文字列を入力してください。  
+ここでは `mydatabase` とします。
+
+GUIに飽きてきた頃だと思うので、データベース名はCLIから登録します。
+
+```console
+$ aws ssm put-parameter --name "/handson/db/name" --value "mydatabase" --type String
+{
+    "Version": 1
+}
+```
+
 
 ### Laravel用の暗号化キーを生成・登録
 Laravelでは起動時に暗号化キーが必要なので、その生成と登録を行います。  
@@ -60,6 +75,7 @@ $ aws ssm put-parameter --name "/handson/app/key" --value ${LARAVEL_APP_KEY} --t
     "Version": 1
 }
 ```
+
 
 ## ECRへpush
 
