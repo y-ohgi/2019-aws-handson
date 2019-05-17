@@ -80,7 +80,6 @@ $ aws ecr create-repository --repository-name app
 $ aws ecr describe-repositories --query 'repositories[].repositoryName'
 [
     "nginx",
-    "handson-nginx",
     "app"
 ]
 ```
