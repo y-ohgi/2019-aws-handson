@@ -12,7 +12,7 @@ $ cd 2019-aws-handson/laravel
 $ docker-compose up
 ```
 
-Laravelのウェルカムページが表示されれば成功です！
+[http://localhost:8001](http://localhost:8001) へアクセスし、Laravelのウェルカムページが表示されれば成功です！
 
 ![Laravel](imgs/laravel.png)
 
