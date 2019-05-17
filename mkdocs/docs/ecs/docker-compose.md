@@ -7,7 +7,8 @@ ECSの前に、まずはローカルでdocker-composeを用いてLaravelを動�
 ハンズオンのディレクトリへ移動してdocker-composeで起動してみましょう。  
 
 ```console
-$ cd /path/to/2019-aws-handson
+$ git clone https://github.com/y-ohgi/2019-aws-handson
+$ cd 2019-aws-handson/laravel
 $ docker-compose up
 ```
 
