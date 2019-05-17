@@ -27,8 +27,6 @@ data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
 locals {
-  name = "${var.name}-laravel"
-
   # アカウントID
   account_id = "${data.aws_caller_identity.current.account_id}"
 
@@ -37,7 +35,7 @@ locals {
 }
 
 resource "aws_lb_target_group" "this" {
-  name = "${local.name}"
+  name = "${var.name}"
 
   vpc_id = "${var.vpc_id}"
 
@@ -51,7 +49,7 @@ resource "aws_lb_target_group" "this" {
 }
 
 resource "aws_ecs_task_definition" "this" {
-  family = "${local.name}"
+  family = "${var.name}"
 
   container_definitions = "${var.container_definitions}"
 
@@ -65,12 +63,12 @@ resource "aws_ecs_task_definition" "this" {
 }
 
 resource "aws_cloudwatch_log_group" "this" {
-  name              = "/${local.name}/ecs"
+  name              = "/${var.name}/ecs"
   retention_in_days = "7"
 }
 
 resource "aws_iam_role" "task_execution" {
-  name = "${local.name}-TaskExecution"
+  name = "${var.name}-TaskExecution"
 
   assume_role_policy = <<EOF
 {
@@ -97,15 +95,17 @@ resource "aws_iam_role_policy" "task_execution" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:CreateLogStream",
-        "logs:PutLogEvents",
-        "logs:DescribeLogGroups",
-        "logs:DescribeLogStreams"
-      ],
       "Effect": "Allow",
-      "Resource": "*"
+      "Action": [
+        "ssm:GetParameters",
+        "secretsmanager:GetSecretValue",
+        "kms:Decrypt"
+      ],
+      "Resource": [
+        "arn:aws:ssm:${local.region}:${local.account_id}:parameter/*",
+        "arn:aws:secretsmanager:${local.region}:${local.account_id}:secret:*",
+        "arn:aws:kms:${local.region}:${local.account_id}:key/*"
+      ]
     }
   ]
 }
@@ -132,8 +132,8 @@ resource "aws_lb_listener_rule" "this" {
 }
 
 resource "aws_security_group" "this" {
-  name        = "${local.name}"
-  description = "${local.name}"
+  name        = "${var.name}"
+  description = "${var.name}"
 
   vpc_id = "${var.vpc_id}"
 
@@ -145,7 +145,7 @@ resource "aws_security_group" "this" {
   }
 
   tags = {
-    Name = "${local.name}"
+    Name = "${var.name}"
   }
 }
 
@@ -163,7 +163,7 @@ resource "aws_security_group_rule" "this_http" {
 resource "aws_ecs_service" "this" {
   depends_on = ["aws_lb_listener_rule.this"]
 
-  name = "${local.name}"
+  name = "${var.name}"
 
   launch_type = "FARGATE"
 
