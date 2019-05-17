@@ -37,13 +37,14 @@ extra_javascript:
 
 nav:
   - 'Home': 'index.md'
+  - 'Swarm':
+    - 'About': 'swarm/index.md'
+    - 'ハンズオン': 'swarm/handson.md'
   - 'Terraform':
     - '概要': 'terraform/about.md'
     - 'コマンドの用意': 'terraform/command.md'
     - 'ハンズオン': 'terraform/handson.md'
   - 'ECS':
-    # - '概要': 'ecs/index.md'
-    - 'ハンズオンの環境構築': 'ecs/provisioning.md'
     - 'docker-composeで動作確認をする': 'ecs/docker-compose.md'
     - 'LaravelをECSで動かす': 'ecs/laravel.md'
     - 'Auroraと連携': 'ecs/aurora.md'
